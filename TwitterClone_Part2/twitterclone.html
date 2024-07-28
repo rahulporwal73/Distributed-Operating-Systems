@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>COP 5615 : Project 4b : Twitter Clone by Rahul and Pujan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.1.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body onload = "loginload()" style="font-family:'Times New Roman'; background-color:#f4f0ff">
+    <nav>
+        <div class="nav-wrapper blue lighten-2">
+            <a href="#" class="brand-logo center" style="font-family:'Times New Roman'">COP 5615 : Project 4b : Twitter Clone</a>
+         
+        </div>
+    </nav>
+    
+    <div id="main" class="container">
+        <table class="container" id ="reglogin">
+            <thead>
+                <style>
+                    table,
+                    th {
+                      padding: 20px;
+                      border: 2px solid #1c87c9;
+                      border-radius: 5px;
+                      background-color: #e5e5e5;
+                      text-align: center;
+                    }
+                  </style>
+                <tr>
+                    <th style="font-family:'Times New Roman'">Twitter Sign in</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row">
+                    <td class="col-sm">
+                        <div id ="register" class="card-panel">
+                            <label for="runame">User Name:</label>
+                            <input type="text" id="runame" name="fname">
+                            <label for="rpass">Password:</label>
+                            <input type="password" id="rpass" name="pwd">
+                            <div class = "left">
+                                <a class="waves-effect waves-light btn" style="background-color:#d2dda0" type="submit" name="action" onclick="register()"></i>Register</a>
+                            </div>
+                            <div class = "right">
+                                <a class="waves-effect waves-light btn" style="background-color:#d2dda0" type="submit" name="action" onclick="login()"></i>Login</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+           
+        </table>
+        
+        <nav>
+            <div class="nav-wrapper blue lighten-2">
+                <a href="#" class="brand-logo center" style="font-family:'Times New Roman'">By Pujan Kothari and Rahul Porwal   </a>
+             
+            </div>
+        </nav>
+        
+        
+        <div id="full">
+            <div id="output" class="center" style="background-color:#d1dda0;margin: 10px;">
+                <h5>Newsfeed </h5>
+            </div>
+            <!--<table>-->
+            <tbody>
+
+                <div class="container">
+                    <tr class="row">
+                        <td class="col-xs-6">
+                            <div id = "divtweet" class="card-panel">
+                                <label for="tweet">What's up?</label>
+                                <input type="text" id="tweet" name="tweet">
+                                <a class="btn-floating waves-effect waves-light" style="background-color:#d1dda0" type="submit" name="tweet" onclick="tweet()">Tweet</a>
+                            </div>
+
+
+                            <div id = "divfollower" class="card-panel">
+                                <label for="follower">Follow:</label>
+                                <input type="text" id="follower" name="follower">
+                                <a class="btn-floating waves-effect waves-light" style="background-color:#d1dda0"  type="submit" name="follow" onclick="follow()">Follow</a>
+                            </div>
+                        </td>
+                        <td class="col-xs-6">
+                            
+                        </td>
+                    </tr>
+                   
+                </div>
+
+                <div class="container">
+                    <tr class="row">
+                        <td class="col-xs-6">
+                            <div id = "GetTweets" class="card-panel">
+                                <label for="gettweets">View Wall</label><br>
+                                <textarea id="gettweets" name="gettweets" rows="10" cols="50" disabled style="height: 50%;"                                ></textarea><br><br>
+                                <div id ="dtweets"></div>
+                                <a class="waves-effect waves-light btn" style="background-color:#d1dda0" type="submit" name="gettweets" onclick="gettweets()">View all Tweets</a>
+                                
+                                <button type="button" class="waves-effect waves-light btn" onclick="alert('Tweet has been retweeted')">retweet this tweet!</button>
+                            
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+                        <td class="col-xs-6">
+                            <div id = "GetMentions" class="card-panel">
+                                <label for="getmentions">Mentioned Tweets</label>
+                                <textarea id="getmentions" name="getmentions" rows="10" cols="50" disabled style="height: 50%;"></textarea><br><br>
+                                <a class="waves-effect waves-light btn" style="background-color:#d1dda0" type="submit" name="getmentions" onclick="getmentions()">View</a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+                        <td class="col-xs-6">
+                            <div id = "GetHashTags" class="card-panel">
+                                <label for="gethashtags">View Hashtag tweets</label>
+                                <textarea id="gethashtags" name="gethashtags" rows="10" cols="50" disabled style="height: 40%;"></textarea><br>
+                                <label for="hashtag">Which Hashtag?</label>
+                                <input type="text" id="hashtag" name="hashtag"><br>
+                                <a class="waves-effect waves-light btn" style="background-color:#d1dda0" type="submit" name="gethashtags" onclick="gethashtags()">View</a>
+                            </div>
+                        </td>
+                    </tr>
+                </div>
+            </tbody>
+            <!--</table>-->
+        </div>
+        
+        <ul id="nav-mobile" class="center hide-on-med-and-down" >
+            <div style="text-align: center;">
+            <li><button class="waves-effect waves-light btn" style="font-family:'Times New Roman'; background-color:#c7dda0;text-align: center;display: block; margin: 0 auto;"  type="submit" name="action" id="logouthead" onclick="logout()">Logout</button></li>
+        </div>
+        </ul>
+        
+    </div>
+    <script type="text/javascript">
+        var username = ""
+        function loginload(){
+            
+            document.getElementById("full").style.display="none";
+            document.getElementById("logouthead").style.display="none";
+            document.getElementById("reglogin").style.display="block";
+            clearinput();
+        }
+        function userload(){
+            
+            document.getElementById("full").style.display="block";
+            document.getElementById("logouthead").style.display="block";
+            document.getElementById("reglogin").style.display="none";
+            clearinput();
+        }
+        function clearinput(){
+            var elements = document.getElementsByTagName("input");
+            for (var ii=0; ii < elements.length; ii++) {
+                elements[ii].value = "";
+            }   
+            elements = document.getElementsByTagName("textarea");
+            for (var ii=0; ii < elements.length; ii++) {
+                elements[ii].value = "";
+            }
+        }
+        function register(){
+            var url = "http://127.0.0.1:8080/userRegister";
+            var uname = document.getElementById("runame").value;
+            var pwd = document.getElementById("rpass").value;
+            var data = JSON.stringify({'UserId':uname,"Password":pwd});
+            clearinput();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    if(data.isFailed){
+                    }else{
+                    }
+                    alert(data.message);
+                    
+                }
+            });
+            
+            
+        }
+        function login(){
+            var url = "http://127.0.0.1:8080/userLogin";
+            var uname = document.getElementById("runame").value;
+            var pwd = document.getElementById("rpass").value;
+            var data = JSON.stringify({'UserId':uname,"Password":pwd});
+            clearinput();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    if(data.isFailed){
+                        if(data.result == 0){
+                            alert(data.message);
+                        }else{
+                            username = uname;
+                            startWebSocket();
+                            userload();
+                        }
+                    }else{
+                        username = uname;
+                        startWebSocket();
+                        userload();
+                    }
+                    
+                }
+            });
+            console.log(username)
+        }
+        function logout(){
+            var url = "http://127.0.0.1:8080/userLogout";
+            var data = JSON.stringify({'UserId':username});
+            clearinput();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    if(data.isFailed){
+                    }else{
+                    }
+                    loginload();
+                    username = "";
+                }
+            });
+        }
+        function tweet(){
+            var url = "http://127.0.0.1:8080/freshtweet";
+            var tweett = document.getElementById("tweet").value;
+            var data = JSON.stringify({'Tweet':tweett,'UserId':username});
+            clearinput();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    
+                    if(data.isFailed){
+                        alert(data.message);
+                        if(data.result < 2){
+                            loginload();
+                        }
+                    }else{
+                    }
+                   
+                    
+                }
+            });
+        }
+        function follow(){
+            var url = "http://127.0.0.1:8080/addFollower";
+            var following = document.getElementById("follower").value;
+            var data = JSON.stringify({'UserId':username,"Following":following});
+            clearinput();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: data,
+                dataType: "json",
+                success: function(data){
+                    
+                    if(data.isFailed){
+                        alert(data.message);
+                        if(data.result < 2){
+                            loginload();
+                        }
+                    }else{
+                        
+                    }
+                    
+                }
+            });
+        }
+        function gethashtags(){
+            var hashtag = document.getElementById("hashtag").value;
+            var url = "http://127.0.0.1:8080/fetchHashtags/"+username+"/"+hashtag;
+            clearinput();
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function(data){
+                    
+                    if(data.isFailed){
+                        alert(data.message);
+                        if(data.result < 2){
+                            loginload();
+                        }
+                    }else{
+                        var text = "";
+                        for (i=0;i<data.data.length;i++){
+                            text += data.data[i]+"\n"
+                        }
+                        document.getElementById("gethashtags").value = text
+                    }
+                    
+                    
+                }
+            });
+        }
+        function getmentions(){
+            var url = "http://127.0.0.1:8080/fetchMentions/"+username;
+            clearinput();
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function(data){
+                    if(data.isFailed){
+                        alert(data.message);
+                        if(data.result < 2){
+                            loginload();
+                        }
+                    }else{
+                        var text = "";
+                        for (i=0;i<data.data.length;i++){
+                            text += data.data[i]+"\n"
+                        }
+                        document.getElementById("getmentions").value = text
+                    }
+                    
+                    
+                }
+            });
+        }
+        function gettweets(){
+            var url = "http://127.0.0.1:8080/fetchTweets/"+username;
+            clearinput();
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function(data){
+                    if(data.isFailed){
+                        alert(data.message);
+                        if(data.result < 2){
+                            loginload();
+                        }
+                    }else{
+                        var text = "";
+                        for (i=0;i<data.data.length;i++){
+                            text += data.data[i]+"\n";
+                        }
+                        document.getElementById("gettweets").value = text
+                    }
+                    
+                    
+                }
+            });
+        }
+        var output;
+        function startWebSocket(){
+            var wsUri = "ws://localhost:8080/websocket";
+            websocket = new WebSocket(wsUri);
+            output = document.getElementById("output");
+            websocket.onopen = function(evt) { onOpen(evt) };
+            websocket.onclose = function(evt) { onClose(evt) };
+            websocket.onmessage = function(evt) { onMessage(evt) };
+            websocket.onerror = function(evt) { onError(evt) };
+        }
+        function onOpen(evt)
+        {
+            writeToScreen("Server connection established!");
+            var message = "UserId:"+username;
+            doSend(message);
+        }
+
+        function onClose(evt)
+        {
+            writeToScreen("Server connection lost!");
+        }
+
+        function onMessage(evt)
+        {
+            writeToScreen('<span style="color: red;border: 10px solid white;margin:5px;background-color:white;"> ' + evt.data+'</span>');
+        }
+
+        function onError(evt)
+        {
+            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+
+        function doSend(message)
+        {
+            console.log("sending"+message) ;
+            websocket.send(message);
+        }
+
+        function writeToScreen(message)
+        {
+            var pre = document.createElement("p");
+            pre.style.wordWrap = "break-word";
+            pre.innerHTML = message;
+            output.appendChild(pre);
+        }
+    </script>
+</body>
+</html>
